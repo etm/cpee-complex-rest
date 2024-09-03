@@ -39,11 +39,12 @@ module CPEE
     def self::implementation(opts)
       Proc.new do
         on resource do
-          run DoIt, :get if get 'fw'
-          run DoIt, :post if post 'fw'
-          run DoIt, :put if put 'fw'
-          run DoIt, :delete if delete 'fw'
-          run DoIt, :patch if patch 'fw'
+          on resource 'exec' do
+            run DoIt, :put if put 'exec'
+          end
+          on resource 'structurize' do
+            run DoIt, :orig if put 'simp'
+          end
         end
       end
     end

@@ -1,7 +1,7 @@
 require 'rake'
 require 'rubygems/package_task'
 
-spec = eval(File.read('cpee-complex-rest.gemspec'))
+spec = eval(File.read('cpee-eval-ruby.gemspec'))
 Gem::PackageTask.new(spec) do |pkg|
   pkg.need_zip = true
   pkg.need_tar = true
@@ -13,9 +13,9 @@ end
 task :default => [:gem]
 
 task :push => :gem do |r|
-  `gem push pkg/cpee-complex-rest.gem`
+  `gem push pkg/cpee-eval-ruby.gem`
 end
 
 task :install => :gem do |r|
-  `gem install pkg/cpee-complex-rest.gem`
+  `gem install pkg/cpee-eval-ruby.gem`
 end

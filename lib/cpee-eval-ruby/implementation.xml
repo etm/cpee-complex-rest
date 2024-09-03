@@ -1,0 +1,75 @@
+<!--
+  This file is part of CPEE-EVAL-RUBY.
+
+  CPEE-EVAL-RUBY is free software: you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as published by the
+  Free Software Foundation, either version 3 of the License, or (at your
+  option) any later version.
+
+  CPEE-EVAL-RUBY is distributed in the hope that it will be useful, but WITHOUT
+  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+  FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+  details.
+
+  You should have received a copy of the GNU Lesser General Public License
+  along with CPEE-EVAL-RUBY (file LICENSE in the main directory).  If not, see
+  <http://www.gnu.org/licenses/>.
+-->
+
+<description datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes" xmlns="http://riddl.org/ns/description/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <message name="exec">
+    <parameter name="code" type="string"/>
+    <parameter name="dataelements" mimetype="application/json"/>
+    <optional>
+      <parameter name="local" mimetype="application/json"/>
+    </optional>
+    <parameter name="endpoints" mimetype="application/json"/>
+    <parameter name="additional" mimetype="application/json"/>
+    <optional>
+      <parameter name="status" mimetype="application/json"/>
+    </optional>
+    <optional>
+      <parameter name="info" type="string"/>
+    </optional>
+    <optional>
+      <parameter name="call_result" mimetype="application/json"/>
+      <parameter name="call_headers" mimetype="application/json"/>
+    </optional>
+  </message>
+
+  <message name="res">
+    <choice>
+      <parameter name="result" type="boolean"/>
+      <parameter name="result" type="string"/>
+    </choice>
+    <optional>
+      <parameter name="signal" type="string"/>
+    </optional>
+    <optional>
+      <parameter name="changed_dataelements" mimetype="application/json"/>
+    </optional>
+    <optional>
+      <parameter name="changed_local" mimetype="application/json"/>
+    </optional>
+    <optional>
+      <parameter name="changed_endpoints" mimetype="application/json"/>
+    </optional>
+    <optional>
+      <parameter name="changed_status" mimetype="application/json"/>
+    </optional>
+  </message>
+
+  <message name="struc">
+    <parameter name="structurized" mimetype="application/json"/>
+  </message>
+
+  <resource>
+    <resource relative="exec">
+      <put in="exec" out="res"/>
+    </resource>
+    <resource relative="structurize">
+      <put out="struc"/>
+    </resource>
+  </resource>
+
+</description>

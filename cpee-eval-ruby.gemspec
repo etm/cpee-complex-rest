@@ -1,17 +1,17 @@
 Gem::Specification.new do |s|
-  s.name             = "cpee-complex-rest"
-  s.version          = "1.0.21"
+  s.name             = "cpee-eval-ruby"
+  s.version          = "1.0.0"
   s.platform         = Gem::Platform::RUBY
   s.license          = "LGPL-3.0"
-  s.summary          = "Complex REST calls for the cloud process execution engine (cpee.org)"
+  s.summary          = "Ruby eval for the cloud process execution engine (cpee.org)"
 
   s.description      = "see http://cpee.org"
 
-  s.files            = Dir['{server/**/*,tools/**/*,lib/**/*}'] + %w(LICENSE Rakefile cpee-complex-rest.gemspec README.md AUTHORS)
+  s.files            = Dir['{server/**/*,tools/**/*,lib/**/*}'] + %w(LICENSE Rakefile cpee-eval-ruby.gemspec README.md AUTHORS)
   s.require_path     = 'lib'
   s.extra_rdoc_files = ['README.md']
   s.bindir           = 'tools'
-  s.executables      = ['cpee-complex-rest']
+  s.executables      = ['cpee-eval-ruby']
 
   s.required_ruby_version = '>=2.4.0'
 
