@@ -23,8 +23,19 @@ module CPEE
   module EvalRuby
     module Translation
 
+      class ParamArray < ::Array
+        def value(index)
+          tmp = find_all{|e| e['name'] == index}
+          case tmp.length
+            when 0; nil
+            when 1; tmp[0]['data']
+            else tmp
+          end if tmp
+        end
+      end
+
       def self::simplify_structurized_result(result)
-        if result.length == 1
+        if result && result.length == 1
           if result[0].has_key? 'mimetype'
             if result[0]['mimetype'] == 'application/json'
               result = JSON::parse(result[0]['data']) rescue nil
@@ -53,7 +64,7 @@ module CPEE
             result = result[0]['data']
           end
         else
-          result = Riddl::Parameter::Array[*result]
+          result = ParamArray[*result]
         end
         if result.is_a? String
           enc = CPEE::EvalRuby::Translation::detect_encoding(result)
