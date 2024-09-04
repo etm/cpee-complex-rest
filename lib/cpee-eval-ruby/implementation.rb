@@ -1,17 +1,17 @@
-# This file is part of CPEE-COMPLEX-REST.
+# This file is part of CPEE-EVAL-RUBY.
 #
-# CPEE-COMPLEX-REST is free software: you can redistribute it and/or modify it
+# CPEE-EVAL-RUBY is free software: you can redistribute it and/or modify it
 # under the terms of the GNU Lesser General Public License as published by the
 # Free Software Foundation, either version 3 of the License, or (at your
 # option) any later version.
 #
-# CPEE-COMPLEX-REST is distributed in the hope that it will be useful, but
+# CPEE-EVAL-RUBY is distributed in the hope that it will be useful, but
 # WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
 # FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
 # for more details.
 #
 # You should have received a copy of the GNU Lesser General Public License
-# along with CPEE-COMPLEX-REST (file LICENSE in the main directory).  If not,
+# along with CPEE-EVAL-RUBY (file LICENSE in the main directory).  If not,
 # see <http://www.gnu.org/licenses/>.
 
 require 'rubygems'
@@ -23,16 +23,21 @@ require 'base64'
 require 'uri'
 require 'redis'
 require 'json'
+require_relative 'translation'
 
 module CPEE
-  module ComplexRest
+  module EvalRuby
 
     SERVER = File.expand_path(File.join(__dir__,'implementation.xml'))
 
     class DoIt < Riddl::Implementation #{{{
       def response
-        op = @a[0]
-        send = []
+
+      end
+    end #}}}
+    class Structurize < Riddl::Implementation #{{{
+      def response
+        Riddl::Parameter::Complex('structurized','application/json',Utils::structurize_result(@p))
       end
     end #}}}
 
@@ -43,7 +48,7 @@ module CPEE
             run DoIt, :put if put 'exec'
           end
           on resource 'structurize' do
-            run DoIt, :orig if put 'simp'
+            run Structurize, :orig if put
           end
         end
       end
