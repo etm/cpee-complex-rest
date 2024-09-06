@@ -29,9 +29,6 @@
       <parameter name="status" mimetype="application/json"/>
     </optional>
     <optional>
-      <parameter name="info" type="string"/>
-    </optional>
-    <optional>
       <parameter name="call_result" mimetype="application/json"/>
       <parameter name="call_headers" mimetype="application/json"/>
     </optional>
@@ -47,9 +44,6 @@
     </optional>
     <optional>
       <parameter name="changed_dataelements" mimetype="application/json"/>
-    </optional>
-    <optional>
-      <parameter name="changed_local" mimetype="application/json"/>
     </optional>
     <optional>
       <parameter name="changed_endpoints" mimetype="application/json"/>
