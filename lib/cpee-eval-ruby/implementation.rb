@@ -38,6 +38,8 @@ module CPEE
 
       def response
         code = @p.shift.value
+        # code = code.read if code.respond_to? :read
+        # code = Riddl::Protocols::Utils::unescape(code)
         dataelements = JSON::parse(@p.shift.value.read)
         local = nil
         local = JSON::parse(@p.shift.value.read) if @p[0].name == 'local'
