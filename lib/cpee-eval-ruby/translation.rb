@@ -43,7 +43,7 @@ module CPEE
               result = result[0]['data']
             elsif result[0]['mimetype'] == 'text/yaml'
               result = YAML::load(result[0]['data']) rescue nil
-            elsif result[0]['mimetype'] == 'application/xml' || result[0].mimetype == 'text/xml'
+            elsif result[0]['mimetype'] == 'application/xml' || result[0]['mimetype'] == 'text/xml'
               result = XML::Smart::string(result[0]['data']) rescue nil
             elsif result[0]['mimetype'] == 'text/plain'
               result = result[0]['data']
@@ -53,7 +53,7 @@ module CPEE
                 result = result.to_f if result == result.to_f.to_s
                 result = result.to_i if result == result.to_i.to_s
               end
-            elsif result[0].mimetype == 'text/html'
+            elsif result[0]['mimetype'] == 'text/html'
               result = result[0]['data']
               result = result.to_f if result == result.to_f.to_s
               result = result.to_i if result == result.to_i.to_s
