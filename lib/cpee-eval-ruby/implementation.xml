@@ -41,6 +41,7 @@
     </choice>
     <optional>
       <parameter name="signal" type="string"/>
+      <parameter name="signal_text" type="string"/>
     </optional>
     <optional>
       <parameter name="changed_dataelements" mimetype="application/json"/>
