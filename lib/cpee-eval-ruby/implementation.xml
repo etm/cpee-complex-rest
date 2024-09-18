@@ -53,6 +53,28 @@
       <parameter name="changed_status" mimetype="application/json"/>
     </optional>
   </message>
+  <message name="res-full">
+    <choice>
+      <parameter name="result" type="boolean"/>
+      <parameter name="result" type="string"/>
+    </choice>
+    <optional>
+      <parameter name="signal" type="string"/>
+      <parameter name="signal_text" type="string"/>
+    </optional>
+    <optional>
+      <parameter name="dataelements" mimetype="application/json"/>
+      <parameter name="changed_dataelements" mimetype="application/json"/>
+    </optional>
+    <optional>
+      <parameter name="endpoints" mimetype="application/json"/>
+      <parameter name="changed_endpoints" mimetype="application/json"/>
+    </optional>
+    <optional>
+      <parameter name="changed_status" mimetype="application/json"/>
+    </optional>
+  </message>
+
 
   <message name="struc">
     <parameter name="structurized" mimetype="application/json"/>
@@ -61,6 +83,9 @@
   <resource>
     <resource relative="exec">
       <put in="exec" out="res"/>
+    </resource>
+    <resource relative="exec-full">
+      <put in="exec" out="res-full"/>
     </resource>
     <resource relative="structurize">
       <put out="struc"/>

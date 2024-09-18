@@ -32,14 +32,13 @@ module CPEE
     SERVER = File.expand_path(File.join(__dir__,'implementation.xml'))
 
     class DoIt < Riddl::Implementation #{{{
-      def exec(mr,code,result=nil,headers=nil)
-        mr.instance_eval(code)
+      def exec(__struct,__code,result=nil,headers=nil)
+        __struct.instance_eval(__code)
       end
 
       def response
+        mode = @a[0]
         code = @p.shift.value
-        # code = code.read if code.respond_to? :read
-        # code = Riddl::Protocols::Utils::unescape(code)
         dataelements = JSON::parse(@p.shift.value.read)
         local = nil
         local = JSON::parse(@p.shift.value.read) if @p[0].name == 'local'
@@ -69,12 +68,18 @@ module CPEE
           struct.changed_data.each do |e|
             res[e] = struct.data[e]
           end
-          ret.push Riddl::Parameter::Complex.new('changed_dataelements','application/json',JSON::generate(res)) if res.any?
+          if res.any?
+            ret.push Riddl::Parameter::Complex.new('dataelements','application/json',JSON::generate(data)) if mode == :full
+            ret.push Riddl::Parameter::Complex.new('changed_dataelements','application/json',JSON::generate(res))
+          end
           res = {}
           struct.changed_endpoints.each do |e|
             res[e] = struct.endpoints[e]
           end
-          ret.push Riddl::Parameter::Complex.new('changed_endpoints','application/json',JSON::generate(res)) if res.any?
+          if res.any?
+            ret.push Riddl::Parameter::Complex.new('endpoints','application/json',JSON::generate(endpoints)) if mode == :full
+            ret.push Riddl::Parameter::Complex.new('changed_endpoints','application/json',JSON::generate(res))
+          end
           ret.push Riddl::Parameter::Complex.new('changed_status','application/json',JSON::generate(status)) if struct.changed_status
           ret
         else
@@ -94,7 +99,10 @@ module CPEE
       Proc.new do
         on resource do
           on resource 'exec' do
-            run DoIt if put 'exec'
+            run DoIt, :small if put 'exec'
+          end
+          on resource 'exec-full' do
+            run DoIt, :full if put 'exec'
           end
           on resource 'structurize' do
             run Structurize if put
