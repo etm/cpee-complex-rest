@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name             = "cpee-eval-ruby"
- s.version          = "1.0.4"
+ s.version          = "1.0.5"
   s.platform         = Gem::Platform::RUBY
   s.license          = "LGPL-3.0-or-later"
   s.summary          = "Ruby eval for the cloud process execution engine (cpee.org)"
@@ -21,5 +21,5 @@ Gem::Specification.new do |s|
   s.homepage         = 'http://cpee.org/'
 
   s.add_runtime_dependency 'riddl', '~> 1.0'
-  s.add_runtime_dependency 'cpee', '~> 2.1', '>= 2.1.67'
+  s.add_runtime_dependency 'cpee', '~> 2.1', '>= 2.1.69'
 end
