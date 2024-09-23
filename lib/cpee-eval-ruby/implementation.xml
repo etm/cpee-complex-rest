@@ -35,10 +35,7 @@
   </message>
 
   <message name="res">
-    <choice>
-      <parameter name="result" type="boolean"/>
-      <parameter name="result" type="string"/>
-    </choice>
+    <parameter name="result" mimetype="application/json"/>
     <optional>
       <parameter name="signal" type="string"/>
       <parameter name="signal_text" type="string"/>
@@ -54,10 +51,7 @@
     </optional>
   </message>
   <message name="res-full">
-    <choice>
-      <parameter name="result" type="boolean"/>
-      <parameter name="result" type="string"/>
-    </choice>
+    <parameter name="result" mimetype="application/json"/>
     <optional>
       <parameter name="signal" type="string"/>
       <parameter name="signal_text" type="string"/>

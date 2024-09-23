@@ -24,6 +24,7 @@ require 'uri'
 require 'redis'
 require 'json'
 require 'weel'
+require 'charlock_holmes'
 require_relative 'translation'
 
 module CPEE
@@ -35,7 +36,7 @@ module CPEE
       def exec(__struct,__code,result=nil,headers=nil)
         __ret = {}
         __cat = catch WEEL::Signal::Again do
-          __ret[:res] = __struct.instance_eval(__code)
+          __ret[:res] = JSON::generate(__struct.instance_eval(__code))
           WEEL::Signal::Proceed
         end
         if __cat.nil? || __cat == WEEL::Signal::Again
@@ -87,7 +88,7 @@ module CPEE
           execresult = exec struct, code, CPEE::EvalRuby::Translation::simplify_structurized_result(call_result), call_headers
 
           send = []
-          send << Riddl::Parameter::Simple.new('result',execresult[:res])
+          send << Riddl::Parameter::Complex.new('result','application/json',execresult[:res])
           if execresult[:signal]
             send << Riddl::Parameter::Simple.new('signal',execresult[:signal])
             send << Riddl::Parameter::Simple.new('signal_text',execresult[:signal_text] || '')
@@ -116,7 +117,7 @@ module CPEE
           struct = WEEL::ReadStructure.new(dataelements,endpoints,local,additional)
           execresult = exec struct, code
           send = []
-          send << Riddl::Parameter::Simple.new('result',execresult[:res])
+          send << Riddl::Parameter::Complex.new('result','application/json',execresult[:res])
           if execresult[:signal]
             send << Riddl::Parameter::Simple.new('signal',execresult[:signal])
             send << Riddl::Parameter::Simple.new('signal_text',execresult[:signal_text] || '')
