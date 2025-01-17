@@ -21,7 +21,7 @@ require 'cpee-complex-rest/implementation'
 
 options = {
   :host => 'localhost',
-  :port => 9296,
+  :port => 9311,
   :secure => false
 }
 

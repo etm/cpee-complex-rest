@@ -18,9 +18,8 @@
 
 <description datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes" xmlns="http://riddl.org/ns/description/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
   <message name="fw">
-    <parameter name="headers" mimetype="application/json"/>
-    <parameter name="query" mimetype="application/json"/>
-    <parameter name="body" mimetype="application/json"/>
+    <parameter name="target" type="string"/>
+    <parameter name="parameters" type="string"/>
   </message>
 
   <resource>
