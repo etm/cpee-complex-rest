@@ -33,12 +33,12 @@ To install the service go to the commandline
  ./complex-rest start
 ```
 
-The service is running under port 9311. If this port has to be changed (or the
+The service is running under port 9313. If this port has to be changed (or the
 host, or local-only access, ...), create a file instatiation.conf and add one
 or many of the following yaml keys:
 
 ```yaml
- :port: 9311
+ :port: 9313
  :host: cpee.org
  :bind: 127.0.0.1
 ```
