@@ -2,7 +2,7 @@ Gem::Specification.new do |s|
   s.name             = "cpee-complex-rest"
   s.version          = "1.0.21"
   s.platform         = Gem::Platform::RUBY
-  s.license          = "LGPL-3.0"
+  s.license          = "GPL-3.0-or-later"
   s.summary          = "Complex REST calls for the cloud process execution engine (cpee.org)"
 
   s.description      = "see http://cpee.org"
